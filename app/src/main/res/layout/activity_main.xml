@@ -13,6 +13,7 @@
         android:layout_height="250dp"
         android:layout_marginTop="124dp"
         android:src="@drawable/lending"
+        android:transitionName="logo_image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,6 +26,7 @@
         android:layout_marginTop="80dp"
         android:fontFamily="sans-serif-condensed-light"
         android:text="NIKEL FINANCIAL SOLUTIONS"
+        android:transitionName="logo_text"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -38,6 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
         android:text='"The driving force behind your entrepreneurship"'
+        android:transitionName="slogan_text"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
