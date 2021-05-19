@@ -4,25 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity"
+    tools:context=".signUp"
     android:orientation="vertical"
     android:background="#fff"
     android:padding="20dp">
 
     <ImageView
-        android:id="@+id/logo_img"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
         android:transitionName="logo_image"
-        android:src="@drawable/lending" />
+        android:src="@drawable/lending"/>
 
     <TextView
         android:id="@+id/logo_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello There!, Welcome Back"
+        android:text="Welcome"
         android:transitionName="logo_text"
-        android:textSize="40sp"
+        android:textSize="30sp"
         android:fontFamily="serif"
         android:layout_marginTop="10dp"
         android:textColor="#000"/>
@@ -31,13 +30,13 @@
         android:id="@+id/slogan_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sign In to Continue"
+        android:text="Sign Up to start your new journey"
         android:transitionName="slogan_text"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:fontFamily="serif"
         android:layout_marginTop="5dp"
         android:textColor="#000"/>
-    
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -48,14 +47,68 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/username"
-            android:hint="Username"
+            android:id="@+id/full_names"
+            android:transitionName="full_name_trans"
+            android:hint="Full Names"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:inputType="text"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/username"
+            android:hint="Username"
+            app:counterEnabled="true"
+            app:counterMaxLength="15"
+            android:transitionName="username_trans"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/email"
+            android:transitionName="email_trans"
+            android:hint="Email"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/phone_number"
+            android:transitionName="phone_trans"
+            android:hint="Phone Number"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -64,6 +117,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/password"
             android:hint="Password"
+            android:transitionName="password_trans"
             app:passwordToggleEnabled="true"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
@@ -76,36 +130,25 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/forgot_password"
-            android:layout_width="200dp"
+            android:id="@+id/sign_up"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#00000000"
-            android:text="Forgot Password?"
+            android:background="@color/main_yellow"
+            android:text="register"
+            android:transitionName="register_trans"
             android:layout_gravity="right"
             android:elevation="0dp"
             android:textColor="#000"
-            android:layout_margin="5dp"/>
+            android:layout_marginTop="5dp"
+           />
 
         <Button
             android:id="@+id/sign_in"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/main_yellow"
-            android:text="login"
-            android:transitionName="login_trans"
-            android:layout_gravity="right"
-            android:elevation="0dp"
-            android:textColor="#000"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"/>
-
-        <Button
-            android:id="@+id/sign_up"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:background="#00000000"
-            android:text="new user? signup"
-            android:transitionName="register_trans"
+            android:text="Already Registered? login"
+            android:transitionName="login_trans"
             android:layout_gravity="right"
             android:elevation="0dp"
             android:textColor="#000"
