@@ -11,9 +11,16 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -60,4 +67,104 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
 
     }
+
+    private Boolean validateUsername(){
+        String val = username.getEditText().toString();
+
+
+        if(val.isEmpty()){
+
+            username.setError("Field cannot be empty");
+            return false;
+        }
+        else{
+
+            username.setError(null);
+            username.setErrorEnabled(false);
+            return true;
+        }
+    }
+
+    private Boolean validatePassword(){
+        String val = password.getEditText().toString();
+
+
+        if(val.isEmpty()){
+
+            password.setError("Field cannot be empty");
+            return false;
+        }else{
+
+            password.setError(null);
+            return true;
+        }
+    }
+
+    public void loginUser(View view){
+        if(!validatePassword() | !validateUsername()){
+            return;
+        }else{
+
+            isUser();
+        }
+
+    }
+
+    public void isUser(){
+
+        String userEnteredUsername = username.getEditText().toString().trim();
+        String userEnteredPassword = password.getEditText().toString().trim();
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
+
+        Query checkUser = reference.orderByChild("username").equalTo(userEnteredUsername);
+
+        checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                if(dataSnapshot.exists()){
+
+                    username.setError(null);
+                    username.setErrorEnabled(false);
+
+                    String passwordFromDB = dataSnapshot.child(userEnteredUsername).child("password").getValue(String.class);
+
+                    if(passwordFromDB.equals(userEnteredPassword)){
+
+                        username.setError(null);
+                        username.setErrorEnabled(false);
+
+                        String fullNamesFromDB = dataSnapshot.child(userEnteredUsername).child("full_names").getValue(String.class);
+                        String usernameFromDB = dataSnapshot.child(userEnteredUsername).child("username").getValue(String.class);
+                        String emailFromDB = dataSnapshot.child(userEnteredUsername).child("email").getValue(String.class);
+                        String phoneFromDB = dataSnapshot.child(userEnteredUsername).child("phone_number").getValue(String.class);
+
+                        Intent intent = new Intent(getApplicationContext(),UserProfile.class);
+
+                        intent.putExtra("full_names",fullNamesFromDB);
+                        intent.putExtra("username",usernameFromDB);
+                        intent.putExtra("email",emailFromDB);
+                        intent.putExtra("phone_number",phoneFromDB);
+                        intent.putExtra("password",passwordFromDB);
+
+                        startActivity(intent);
+                    }else{
+                        password.setError("Wrong Snapshot");
+                        password.requestFocus();
+                    }
+                }else{
+
+                    username.setError("No such user exists");
+                    username.requestFocus();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
 }

@@ -37,6 +37,7 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/text2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/text1"
@@ -150,6 +151,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
+                android:id="@+id/full_names"
                 android:hint="Full Names">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -165,6 +167,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
+                android:id="@+id/email"
                 android:hint="Email">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -180,6 +183,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
+                android:id="@+id/phone_number"
                 android:hint="Phone">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -195,6 +199,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
+                android:id="@+id/password"
                 android:hint="Password">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -208,6 +213,7 @@
 
 
             <Button
+                android:id="@+id/update"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Update"

@@ -36,8 +36,120 @@ public class signUp extends AppCompatActivity implements View.OnClickListener{
 
     }
 
+    private Boolean validateName(){
+
+        String val = regName.getEditText().toString();
+
+        if(val.isEmpty()){
+
+            regName.setError("Field cannot be empty");
+            return false;
+        }else{
+
+            regName.setError(null);
+            regName.setErrorEnabled(false);
+            return true;
+        }
+    }
+
+    private Boolean validateUsername(){
+
+        String val = regUsername.getEditText().toString();
+        String noWhiteSpace = "\\\\A\\\\w{4,20}\\\\z";
+
+        if(val.isEmpty()){
+
+            regUsername.setError("Field cannot be empty");
+            return false;
+        }else if(val.length() > 15 ){
+
+            regUsername.setError("Username is too long");
+            return false;
+        }else if(!val.matches(noWhiteSpace)){
+
+            regUsername.setError("White spaces are not allowed");
+            return false;
+        }
+        else{
+
+            regUsername.setError(null);
+            regUsername.setErrorEnabled(false);
+            return true;
+        }
+    }
+
+    private Boolean validateEmail(){
+
+        String val = regEmail.getEditText().toString();
+        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\\\.+[a-z]+";
+
+        if(val.isEmpty()){
+
+            regEmail.setError("Field cannot be empty");
+            return false;
+        }else if(!val.matches(emailPattern)){
+
+            regEmail.setError("Invalid Email Address");
+            return false;
+        }else{
+
+            regEmail.setError(null);
+            regEmail.setErrorEnabled(false);
+            return true;
+        }
+    }
+
+    private Boolean validatePhone(){
+
+        String val = regPhone.getEditText().toString();
+
+        if(val.isEmpty()){
+
+            regPhone.setError("Field cannot be empty");
+            return false;
+        }else{
+
+            regPhone.setError(null);
+            regPhone.setErrorEnabled(false);
+            return true;
+        }
+    }
+
+    private Boolean validatePassword(){
+
+        String val = regPassword.getEditText().toString();
+        String passwordPattern = "^" +
+                                //"(?=.*[0-9])" +         //at least 1 digit
+                                //"(?=.*[a-z])" +         //at least 1 lower case letter
+                                //"(?=.*[A-Z])" +         //at least 1 upper case letter
+                                "(?=.*[a-zA-Z])" +      //any letter
+                                "(?=.*[@#$%^&+=])" +    //at least 1 special character
+                                "(?=\\S+$)" +           //no white spaces
+                                ".{4,}" +               //at least 4 characters
+                                "$";
+
+        if(val.isEmpty()){
+
+            regPassword.setError("Field cannot be empty");
+            return false;
+        }else if(!val.matches(passwordPattern)){
+
+            regPassword.setError("Password is too weak");
+            return false;
+        }else{
+
+            regPassword.setError(null);
+            return true;
+        }
+    }
+
+
     @Override
     public void onClick(View v) {
+
+        if(!validateName() | !validateUsername() | validateEmail() | validatePhone() | validatePassword()){
+            return;
+        }
 
         rootNode = FirebaseDatabase.getInstance();
         reference = rootNode.getReference("users");
