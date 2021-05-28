@@ -20,6 +20,7 @@ public class signUp extends AppCompatActivity implements View.OnClickListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
@@ -36,109 +37,93 @@ public class signUp extends AppCompatActivity implements View.OnClickListener{
 
     }
 
-    private Boolean validateName(){
+    private Boolean validateName() {
+        String val = regName.getEditText().getText().toString();
 
-        String val = regName.getEditText().toString();
-
-        if(val.isEmpty()){
-
+        if (val.isEmpty()) {
             regName.setError("Field cannot be empty");
             return false;
-        }else{
-
+        }
+        else {
             regName.setError(null);
             regName.setErrorEnabled(false);
             return true;
         }
     }
 
-    private Boolean validateUsername(){
+    private Boolean validateUsername() {
+        String val = regUsername.getEditText().getText().toString();
+        String noWhiteSpace = "\\A\\w{4,20}\\z";
 
-        String val = regUsername.getEditText().toString();
-        String noWhiteSpace = "\\\\A\\\\w{4,20}\\\\z";
-
-        if(val.isEmpty()){
-
+        if (val.isEmpty()) {
             regUsername.setError("Field cannot be empty");
             return false;
-        }else if(val.length() > 15 ){
-
-            regUsername.setError("Username is too long");
+        } else if (val.length() >= 15) {
+            regUsername.setError("Username too long");
             return false;
-        }else if(!val.matches(noWhiteSpace)){
-
-            regUsername.setError("White spaces are not allowed");
+        } else if (!val.matches(noWhiteSpace)) {
+            regUsername.setError("White Spaces are not allowed");
             return false;
-        }
-        else{
-
+        } else {
             regUsername.setError(null);
             regUsername.setErrorEnabled(false);
             return true;
         }
     }
 
-    private Boolean validateEmail(){
+    private Boolean validateEmail() {
+        String val = regEmail.getEditText().getText().toString();
+        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
-        String val = regEmail.getEditText().toString();
-        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\\\.+[a-z]+";
-
-        if(val.isEmpty()){
-
+        if (val.isEmpty()) {
             regEmail.setError("Field cannot be empty");
             return false;
-        }else if(!val.matches(emailPattern)){
-
-            regEmail.setError("Invalid Email Address");
+        } else if (!val.matches(emailPattern)) {
+            regEmail.setError("Invalid email address");
             return false;
-        }else{
-
+        } else {
             regEmail.setError(null);
             regEmail.setErrorEnabled(false);
             return true;
         }
     }
 
-    private Boolean validatePhone(){
+    private Boolean validatePhone() {
+        String val = regPhone.getEditText().getText().toString();
 
-        String val = regPhone.getEditText().toString();
-
-        if(val.isEmpty()){
-
+        if (val.isEmpty()) {
             regPhone.setError("Field cannot be empty");
             return false;
-        }else{
-
+        } else {
             regPhone.setError(null);
             regPhone.setErrorEnabled(false);
             return true;
         }
     }
 
-    private Boolean validatePassword(){
+    private Boolean validatePassword() {
 
-        String val = regPassword.getEditText().toString();
-        String passwordPattern = "^" +
-                                //"(?=.*[0-9])" +         //at least 1 digit
-                                //"(?=.*[a-z])" +         //at least 1 lower case letter
-                                //"(?=.*[A-Z])" +         //at least 1 upper case letter
-                                "(?=.*[a-zA-Z])" +      //any letter
-                                "(?=.*[@#$%^&+=])" +    //at least 1 special character
-                                "(?=\\S+$)" +           //no white spaces
-                                ".{4,}" +               //at least 4 characters
-                                "$";
+        String val = regPassword.getEditText().getText().toString();
+//        String passwordVal = "^" +
+//                //"(?=.*[0-9])" +         //at least 1 digit
+//                //"(?=.*[a-z])" +         //at least 1 lower case letter
+//                //"(?=.*[A-Z])" +         //at least 1 upper case letter
+//                "(?=.*[a-zA-Z])" +      //any letter
+//                "(?=.*[@#$%^&+=])" +    //at least 1 special character
+//                "(?=\\S+$)" +           //no white spaces
+//                ".{4,}" +               //at least 4 characters
+//                "$";
 
-        if(val.isEmpty()){
-
+        if (val.isEmpty()) {
             regPassword.setError("Field cannot be empty");
             return false;
-        }else if(!val.matches(passwordPattern)){
 
-            regPassword.setError("Password is too weak");
-            return false;
-        }else{
-
+//        } else if (!val.matches(passwordVal)) {
+//            regPassword.setError("Password is too weak");
+//            return false;
+        } else {
             regPassword.setError(null);
+            regPassword.setErrorEnabled(false);
             return true;
         }
     }
@@ -147,7 +132,7 @@ public class signUp extends AppCompatActivity implements View.OnClickListener{
     @Override
     public void onClick(View v) {
 
-        if(!validateName() | !validateUsername() | validateEmail() | validatePhone() | validatePassword()){
+        if(!validateName() | !validatePassword() | !validatePhone() | !validateEmail() | !validateUsername()){
             return;
         }
 
@@ -155,14 +140,14 @@ public class signUp extends AppCompatActivity implements View.OnClickListener{
         reference = rootNode.getReference("users");
 
         //Get all the values from the text fields
-        String full_names = regName.getEditText().toString();
-        String username = regUsername.getEditText().toString();
-        String email = regEmail.getEditText().toString();
-        String phone_number = regPhone.getEditText().toString();
-        String password = regPassword.getEditText().toString();
+        String full_names = regName.getEditText().getText().toString();
+        String username = regUsername.getEditText().getText().toString();
+        String email = regEmail.getEditText().getText().toString();
+        String phone_number = regPhone.getEditText().getText().toString();
+        String password = regPassword.getEditText().getText().toString();
 
         UserHelperClass helperClass = new UserHelperClass(full_names, username, email, phone_number, password);
 
-        reference.child(phone_number).setValue(helperClass);
+        reference.child(username).setValue(helperClass);
     }
 }

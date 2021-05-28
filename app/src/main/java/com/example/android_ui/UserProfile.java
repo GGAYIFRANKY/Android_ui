@@ -48,7 +48,5 @@ public class UserProfile extends AppCompatActivity {
         Phone.getEditText().setText(user_phone);
         Password.getEditText().setText(user_password);
 
-
-
     }
 }

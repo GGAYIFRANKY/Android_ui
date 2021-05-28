@@ -118,7 +118,7 @@
             android:id="@+id/password"
             android:hint="Password"
             android:transitionName="password_trans"
-            android:passwordToggleEnabled="true"
+            app:passwordToggleEnabled="true"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
 
